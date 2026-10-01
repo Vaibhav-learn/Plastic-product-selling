@@ -2,7 +2,6 @@
 fastapi>=0.115,<1.0
 uvicorn[standard]>=0.30      # includes websockets support for live location
 python-multipart>=0.0.9      # form/file uploads (selfie on check-in)
-aiofiles>=23.2               # serving the HTML frontend via StaticFiles
 
 # ---- Database ----
 sqlalchemy>=2.0,<2.1
