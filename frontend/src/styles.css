@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
+@import 'tailwindcss';
+
+:root {
+  font-family: 'DM Sans', sans-serif;
+  color: #202923;
+  background: #f3f5f0;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  --ink: #202923;
+  --green: #174b3a;
+  --muted: #747c75;
+  --line: #dce2da;
+  --paper: #fbfcf9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.login-layout {
+  display: grid;
+  grid-template-columns: minmax(340px, 0.92fr) minmax(430px, 1.08fr);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.brand-panel,
+.form-panel {
+  min-height: calc(100vh - 40px);
+}
+
+.brand-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 38px 42px 30px;
+  color: #f5f7f1;
+  background-color: var(--green);
+  background-image: linear-gradient(145deg, rgba(255, 255, 255, 0.035) 25%, transparent 25%),
+    linear-gradient(325deg, rgba(12, 35, 28, 0.3), transparent 55%);
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  color: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.brand-mark {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-radius: 50%;
+  color: #d5e3a7;
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.brand-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 500px;
+  margin: auto 0;
+  padding: 64px 0;
+}
+
+.eyebrow {
+  margin: 0 0 20px;
+  color: #c6d6a2;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+}
+
+h1,
+h2 {
+  margin: 0;
+  font-family: 'Manrope', sans-serif;
+  letter-spacing: 0;
+}
+
+h1 {
+  font-size: clamp(42px, 5vw, 68px);
+  font-weight: 600;
+  line-height: 1.07;
+}
+
+.brand-description {
+  max-width: 355px;
+  margin: 24px 0 0;
+  color: #d0dbd2;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.panel-footer {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #d0dbd2;
+  font-size: 12px;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #d7df96;
+}
+
+.form-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 56px clamp(38px, 9vw, 132px);
+  background: var(--paper);
+}
+
+.form-wrap {
+  width: 100%;
+  max-width: 390px;
+  margin: auto;
+}
+
+.form-eyebrow {
+  margin-bottom: 13px;
+  color: #66806e;
+}
+
+h2 {
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.form-intro {
+  margin: 10px 0 34px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+form {
+  display: grid;
+}
+
+label {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+input {
+  width: 100%;
+  height: 48px;
+  margin: 0 0 22px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  outline: none;
+  background: #fff;
+  color: var(--ink);
+  font-size: 14px;
+}
+
+input::placeholder {
+  color: #a1a8a0;
+}
+
+input:focus {
+  border-color: #4b7a62;
+  box-shadow: 0 0 0 3px rgba(75, 122, 98, 0.12);
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 49px;
+  margin-top: 5px;
+  padding: 0 17px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--green);
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 140ms ease;
+}
+
+button:hover {
+  background: #23634c;
+}
+
+button span {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.form-notice {
+  min-height: 20px;
+  margin: 15px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.form-footer {
+  margin: 40px auto 0;
+  color: #858d85;
+  font-size: 11px;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .login-layout {
+    grid-template-columns: 1fr;
+    padding: 0;
+  }
+
+  .brand-panel {
+    min-height: 290px;
+    padding: 24px;
+  }
+
+  .brand-copy {
+    padding: 42px 0 24px;
+  }
+
+  .brand-copy .eyebrow {
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-size: 40px;
+  }
+
+  .brand-description {
+    max-width: 430px;
+    margin-top: 14px;
+    font-size: 13px;
+  }
+
+  .panel-footer {
+    position: absolute;
+    right: 24px;
+    bottom: 29px;
+  }
+
+  .form-panel {
+    min-height: calc(100vh - 290px);
+    padding: 44px 24px 24px;
+  }
+}

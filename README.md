@@ -67,7 +67,15 @@ python -m pip install --upgrade pip
 python -m pip install -r requirements-dev.txt
 ```
 
-The dependency setup is available, but the API, database configuration, frontend, and Docker Compose setup have not been implemented yet. As a result, there is no application start command at this stage. The planned API entry point is `backend/app/main.py`; update this section with run and test commands as those project files are added.
+The backend, database configuration, and Docker Compose setup have not been implemented yet. The frontend has a Vite entry screen. From the project root, start it with:
+
+```powershell
+cd frontend
+npm install
+npm run dev
+```
+
+The sign-in screen is only a deployable UI shell; authentication will work once the backend is implemented. The planned API entry point is `backend/app/main.py`.
 
 WeasyPrint may require additional system libraries depending on the operating system. Its Linux/Docker package requirements are noted in `backend/requirements.txt`.
 
@@ -77,6 +85,9 @@ WeasyPrint may require additional system libraries depending on the operating sy
 README.md
 SPEC.md
 requirements-dev.txt
+.github/
+	workflows/
+		deploy-frontend.yml
 backend/
 	requirements.txt
 	app/
@@ -91,7 +102,14 @@ backend/
 		versions/
 	tests/
 frontend/
+	index.html
+	package.json
+	package-lock.json
+	vite.config.js
 	src/
+		App.jsx
+		main.jsx
+		styles.css
 		api/
 		auth/
 		components/
@@ -100,7 +118,13 @@ frontend/
 			worker/
 ```
 
-This is the initial scaffold. API modules, database models and migrations, tests, seed data, and frontend application files will be added in the build order below.
+This is the initial scaffold. The frontend currently contains a deployable sign-in shell; API modules, database models and migrations, tests, seed data, and the remaining frontend screens will be added in the build order below.
+
+## GitHub Pages deployment
+
+The workflow in `.github/workflows/deploy-frontend.yml` builds the frontend and deploys it to GitHub Pages whenever changes are pushed to `main` (or when manually triggered). In the GitHub repository, open **Settings > Pages** and set the build source to **GitHub Actions**. The project site will be available at `https://vaibhav-learn.github.io/Plastic-product-selling/` after the first successful workflow run.
+
+The production build can be checked locally from `frontend/` with `npm run build`.
 
 ## Build order
 
