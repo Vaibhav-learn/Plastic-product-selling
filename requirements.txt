@@ -1,0 +1,29 @@
+# ---- Web framework ----
+fastapi>=0.115,<1.0
+uvicorn[standard]>=0.30      # includes websockets support for live location
+python-multipart>=0.0.9      # form/file uploads (selfie on check-in)
+aiofiles>=23.2               # serving the HTML frontend via StaticFiles
+
+# ---- Database ----
+sqlalchemy>=2.0,<2.1
+alembic>=1.13
+psycopg2-binary>=2.9         # PostgreSQL driver
+
+# ---- Validation & config ----
+pydantic>=2.7,<3.0
+pydantic-settings>=2.3       # load settings from .env
+python-dotenv>=1.0
+email-validator>=2.1         # optional email field on users
+
+# ---- Auth ----
+PyJWT>=2.8                   # JWT tokens
+bcrypt>=4.1                  # password hashing (used directly, no passlib)
+
+# ---- Invoices (PDF) ----
+weasyprint>=62               # needs system libs: pango, cairo (see note below)
+
+# ---- File storage ----
+cloudinary>=1.40             # check-in selfies / visit photos
+
+# NOTE for Docker/Linux: WeasyPrint needs system packages. In your Dockerfile:
+#   apt-get install -y libpango-1.0-0 libpangoft2-1.0-0 libharfbuzz0b
