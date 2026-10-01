@@ -1,4 +1,4 @@
--r requirements.txt
+-r backend/requirements.txt
 
 # ---- Testing ----
 pytest>=8.2

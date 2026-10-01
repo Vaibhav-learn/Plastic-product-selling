@@ -58,7 +58,7 @@ Payments, GST, credit limits, payroll, leave management, purchase orders, multip
 
 ## Development setup
 
-The root `requirements.txt` contains the backend runtime dependencies, and `requirements-dev.txt` adds test and seed-data dependencies. From the project root, create and activate a virtual environment in PowerShell, then install the development dependencies:
+`backend/requirements.txt` contains the backend runtime dependencies, and the root `requirements-dev.txt` adds test and seed-data dependencies. From the project root, create and activate a virtual environment in PowerShell, then install the development dependencies:
 
 ```powershell
 py -m venv .venv
@@ -69,28 +69,38 @@ python -m pip install -r requirements-dev.txt
 
 The dependency setup is available, but the API, database configuration, frontend, and Docker Compose setup have not been implemented yet. As a result, there is no application start command at this stage. The planned API entry point is `backend/app/main.py`; update this section with run and test commands as those project files are added.
 
-WeasyPrint may require additional system libraries depending on the operating system. Its Linux/Docker package requirements are noted in `requirements.txt`.
+WeasyPrint may require additional system libraries depending on the operating system. Its Linux/Docker package requirements are noted in `backend/requirements.txt`.
 
-## Planned project structure
+## Project structure
 
 ```text
+README.md
+SPEC.md
+requirements-dev.txt
 backend/
+	requirements.txt
 	app/
-		api/          # API routes and authentication dependencies
-		core/         # Configuration, security, and database setup
-		models/       # SQLAlchemy models
-		schemas/      # Pydantic request and response schemas
-		services/     # Order, stock, invoice, and WebSocket logic
-	alembic/        # Database migrations
-	tests/          # Pytest tests
-	seed.py         # Demo data
+		__init__.py
+		api/
+			routes/
+		core/
+		models/
+		schemas/
+		services/
+	alembic/
+		versions/
+	tests/
 frontend/
 	src/
-		admin/        # Administrator screens
-		worker/       # Worker PWA screens
+		api/
+		auth/
+		components/
+		pages/
+			admin/
+			worker/
 ```
 
-The final structure may follow the detailed layout in `SPEC.md` as implementation begins.
+This is the initial scaffold. API modules, database models and migrations, tests, seed data, and frontend application files will be added in the build order below.
 
 ## Build order
 
