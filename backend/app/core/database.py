@@ -23,3 +23,26 @@ SessionLocal = sessionmaker(
 )
 #helps perform database operations
 #it create a factory that can produce database
+
+class Base(DeclarativeBase):
+    pass
+
+#All SQLAlchemy database models inherits from this class
+#represents database tables
+
+def get_db():
+    db = SessionLocal()
+
+    try:
+        yield db
+
+    finally:
+        db.close()
+
+
+#FastAPI Database Dependency
+#This function
+# 1. Creates a database seesion
+# 2. Gives that session to the endpoint
+# 3. Closes the session after the request finishes
+# This prevents database sessions from being left open  
