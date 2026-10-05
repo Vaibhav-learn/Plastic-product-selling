@@ -1,4 +1,4 @@
-# Plastic Distribution Agency Management System
+# Plasto Distribution Agency Management System
 
 An MVP for managing a plastic-products distribution agency. The system is planned for an administrator who manages workers, stores, products, stock, and orders, and sales workers who use a mobile-friendly web app while visiting stores.
 
