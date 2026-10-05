@@ -1,16 +1,19 @@
-# SPEC.md: Plastic Distribution Agency Management System (MVP)
+# SPEC.md: Plasto product Distribution Agency Management System (MVP)
 
 > Read this file fully before writing any code. Follow it exactly. If something is unclear or missing, ask before assuming. Do not add features outside the MVP scope.
 
 ## 1. Project overview
 
-An agency sells plastic products from multiple companies to retail stores across different areas. Sales workers visit stores and take orders. The admin manages workers, stock, and orders, and watches worker attendance and live location.
+An agency sells plasto products from multiple companies to retail stores across different areas. Sales workers visit stores and take orders. The admin manages workers, stock, and orders, and watches worker attendance and live location.
 
 **Goal:** a working, deployed MVP in 2 weeks.
 
 **Users:**
 - **Admin:** full access to everything.
+- **Office Worker:** agency staff role supporting operations, admin tasks, and internal workflows.
 - **Worker (sales):** limited access, used from a phone browser (PWA).
+
+The current backend model also recognizes department-level classification for staff assignments such as operations, HR, and finance.
 
 ## 2. Tech stack (fixed, do not substitute)
 
@@ -31,7 +34,7 @@ An agency sells plastic products from multiple companies to retail stores across
 ## 3. Scope
 
 ### In scope (MVP)
-1. Login with roles (admin, worker)
+1. Login with roles (admin, office worker, worker)
 2. Worker management (add, edit, deactivate)
 3. Attendance: check-in / check-out with GPS
 4. Live location: workers send position, admin sees a live map
@@ -40,27 +43,28 @@ An agency sells plastic products from multiple companies to retail stores across
 7. Orders: worker creates, admin manages status
 8. Simple PDF invoice per order (no GST)
 9. Admin dashboard with summary cards
+10. Department-aware staff classification for operations, HR, and finance
 
 ### Out of scope (phase 2, do NOT build)
-GST calculation, payments and dues aging, credit limits, targets and incentives, payroll, leave, multiple godowns, purchase orders and suppliers, offline sync, native mobile app, extra roles (manager/accountant), notifications, activity log.
+GST calculation, payments and dues aging, credit limits, targets and incentives, payroll, leave, multiple godowns, purchase orders and suppliers, offline sync, native mobile app, extra roles beyond the current admin / office worker / worker structure, extra departments beyond the defined agency model, notifications, activity log.
 
 ## 4. Roles and permissions
 
-| Action | Admin | Worker |
-|---|---|---|
-| Manage workers | Yes | No |
-| View all attendance | Yes | Own only |
-| Check in / out | No | Yes |
-| Send location | No | Yes |
-| View live map | Yes | No |
-| Manage stores | Yes | Add store (status `pending`), view assigned area stores |
-| Manage products | Yes | View only, **cannot see `purchase_price`** |
-| Stock movements | Yes | No |
-| Create order | Yes | Yes (for own stores) |
-| View orders | All | Own only |
-| Change order status | Yes | No (can cancel own order while `placed`) |
-| Download invoice | Yes | Own orders only |
-| Dashboard | Yes | No |
+| Action | Admin | Office Worker | Worker |
+|---|---|---|---|
+| Manage workers | Yes | Maybe (internal admin support, if allowed by workflow) | No |
+| View all attendance | Yes | Limited internal access if needed | Own only |
+| Check in / out | No | No | Yes |
+| Send location | No | No | Yes |
+| View live map | Yes | Limited dashboard access if needed | No |
+| Manage stores | Yes | Yes (office operations support) | Add store (status `pending`), view assigned area stores |
+| Manage products | Yes | Limited read access if required | View only, **cannot see `purchase_price`** |
+| Stock movements | Yes | No | No |
+| Create order | Yes | Yes (if assigned / office workflow) | Yes (for own stores) |
+| View orders | All | Assigned / office visibility | Own only |
+| Change order status | Yes | No | No (can cancel own order while `placed`) |
+| Download invoice | Yes | Assigned order access if needed | Own orders only |
+| Dashboard | Yes | Yes (operations summary) | No |
 
 Enforce permissions in the backend with dependencies (`require_admin`, `get_current_user`), never only in the UI.
 
@@ -76,7 +80,8 @@ Use UUID primary keys (or integer IDs, but be consistent). All tables have `crea
 | phone | str, unique | used as login |
 | email | str, nullable | |
 | password_hash | str | bcrypt |
-| role | enum(`admin`,`worker`) | |
+| role | enum(`admin`,`office_worker`,`worker`) | |
+| department | enum(`operation`,`hr`,`finance`) | optional staff classification |
 | area_id | FK areas, nullable | assigned area for workers |
 | is_active | bool | default true; inactive users cannot log in |
 

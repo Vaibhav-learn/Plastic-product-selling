@@ -2,7 +2,17 @@
 
 An MVP for managing a plastic-products distribution agency. The system is planned for an administrator who manages workers, stores, products, stock, and orders, and sales workers who use a mobile-friendly web app while visiting stores.
 
-> **Status:** Project setup is in progress. The requirements and product specification are in place, but the application itself is not implemented yet. See [SPEC.md](SPEC.md) for the full requirements and working agreement.
+> **Status:** Project setup and backend data modeling are underway. The initial SQLAlchemy foundation is in place for core domain entities, including user-role and department enums, and the area model. See [SPEC.md](SPEC.md) for the full requirements and working agreement.
+
+## Current backend model foundation
+
+The backend now includes the initial data model layer for the agency domain:
+
+- `USER_ROLE` enum with the current user groups: `admin`, `oworker` (office worker), and `worker`
+- `DEPARTMENT` enum with: `operation`, `hr`, and `finance`
+- `Area` model with a unique area name and creation/update timestamps
+
+This foundation supports the next steps for authentication, user management, and the wider agency record model.
 
 ## Goals
 
@@ -29,7 +39,7 @@ An MVP for managing a plastic-products distribution agency. The system is planne
 
 ### Administrator
 
-- Manage workers, areas, stores, products, and stock movements.
+- Manage workers, roles, departments, areas, stores, products, and stock movements.
 - Review and approve stores added by workers.
 - Manage order statuses and download invoices.
 - Review attendance and see active workers on a live map, including route history.
@@ -43,6 +53,20 @@ An MVP for managing a plastic-products distribution agency. The system is planne
 - View stores in their assigned area and add pending stores.
 - Place orders for approved stores and view their own orders and invoices.
 
+### User and department structure
+
+The current backend model defines the primary access layers for agency staff:
+
+- `admin`: full administrative access
+- `oworker`: office-worker access
+- `worker`: field sales worker access
+
+Departments currently modeled in the backend are:
+
+- `operation`
+- `hr`
+- `finance`
+
 ## Important business rules
 
 - Access is role-based. The backend enforces permissions for every protected operation.
@@ -54,7 +78,7 @@ An MVP for managing a plastic-products distribution agency. The system is planne
 
 ## Out of scope for the MVP
 
-Payments, GST, credit limits, payroll, leave management, purchase orders, multiple warehouses, offline synchronization, a native mobile app, additional user roles, notifications, and activity logs are reserved for a later phase.
+Payments, GST, credit limits, payroll, leave management, purchase orders, multiple warehouses, offline synchronization, a native mobile app, additional department definitions beyond the current agency model, notifications, and activity logs are reserved for a later phase.
 
 ## Development setup
 
