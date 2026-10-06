@@ -32,6 +32,13 @@ class Settings(BaseSettings):
 #Access Token lifetime
 #According to our project tokens remain valid for only 12 hours not more than that
 
+
+    INITIAL_ADMIN_NAME: str
+    INITIAL_ADMIN_LOGIN_ID:str
+    INITIAL_ADMIN_PASSWORD:str
+    INITIAL_ADMIN_PHONE: str
+
+
     model_config = SettingsConfigDict(
         env_file = ".env",
         env_file_encoding= "utf-8"
