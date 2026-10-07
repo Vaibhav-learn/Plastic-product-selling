@@ -34,4 +34,4 @@ class Area(Base):
         nullable = False
     )
 
-    users = relationship("Users", back_populates="area")
+    users = relationship("User", back_populates="area")
