@@ -3,6 +3,8 @@ from pydantic import BaseModel
 
 from typing import List, Annotated
 from app.api.routes.auth import router as auth_router
+from app.api.routes.workers import router as workers_router
+
 app = FastAPI(
     title = "Mahalaxmi Agency",
     version ="1.0.0"

@@ -32,4 +32,5 @@ class UserResponse(BaseModel):
     area_id: int | None
     is_active: bool
     must_change_password: bool
+    created_by : int | None
     model_config = ConfigDict(from_attributes = True)
