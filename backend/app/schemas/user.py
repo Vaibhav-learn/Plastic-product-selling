@@ -19,6 +19,8 @@ class UserCreate(BaseModel):
 
             if self.area_id is not None:
                 raise ValueError("Admin cannot have an assigned area")
+
+        return self
             
 
 class UserResponse(BaseModel):

@@ -12,8 +12,8 @@ from app.core.database import Base
 
 class UserRole(str, Enum):
     ADMIN ="admin"
-    OFFICE_WORKER = "oworker"
-    Worker = "worker"
+    OFFICE_WORKER = "office_worker"
+    Worker = "outside_worker"
 
 class Department(str, Enum):
     OPERATIONS ="operation"
