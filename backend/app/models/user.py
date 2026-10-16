@@ -20,7 +20,6 @@ class Department(str, Enum):
     HR ="hr"
     FINANCE ="finance"
 
-
 class User(Base):
 
     __tablename__ = "users"

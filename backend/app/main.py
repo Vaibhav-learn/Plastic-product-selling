@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from typing import List, Annotated
 from app.api.routes.auth import router as auth_router
 from app.api.routes.workers import router as workers_router
+from app.api.routes.areas import router as areas_router
 
 app = FastAPI(
     title = "Mahalaxmi Agency",
@@ -12,6 +13,7 @@ app = FastAPI(
 
 app.include_router(auth_router, prefix ="/api/v1")
 app.include_router(workers_router, prefix="/api/v1")
+app.include_router(areas_router, prefix="/api/v1")
 
 @app.get("/")
 def root():
