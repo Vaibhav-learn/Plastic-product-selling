@@ -16,12 +16,12 @@ class Store(Base):
     name : Mapped[str] = mapped_column(String(150), nullable = False)
 
     owner_name: Mapped[str] = mapped_column(String(100), nullable = False)
-    phone: Mapped[str] = mapped_column(String(10), nullable = False)
-    alternate_phone: Mapped[str] = mapped_column(String(10), nullable = False)
+    phone: Mapped[str] = mapped_column(String(13), nullable = False)
+    alternate_phone: Mapped[str] = mapped_column(String(13), nullable = False)
     address: Mapped[str | None] = mapped_column(Text, nullable = True)
 
-    city: Mapped[str] = mapped_column(String, nullable=False)
-    state: Mapped[str] = mapped_column(String, nullable = False)
+    city: Mapped[str] = mapped_column(String(50), nullable=False)
+    state: Mapped[str] = mapped_column(String(50), nullable = False)
     pincode: Mapped[str] = mapped_column(String(6), nullable = False)
     gst_number : Mapped[str | None] = mapped_column(str(20), nullable=True)
     notes : Mapped[str | None] = mapped_column(Text, nullable= True)
