@@ -11,7 +11,7 @@ class StoreStatus(str, Enum):
     Rejected = "rejected"
 
 class Store(Base):
-    __tablename__ = "store"
+    __tablename__ = "stores"
     id : Mapped[int] = mapped_column(primary_key=True)
     name : Mapped[str] = mapped_column(String(150), nullable = False)
 
@@ -25,12 +25,12 @@ class Store(Base):
     pincode: Mapped[str] = mapped_column(String(6), nullable = False)
     gst_number : Mapped[str | None] = mapped_column(str(20), nullable=True)
     notes : Mapped[str | None] = mapped_column(Text, nullable= True)
-    area_id: Mapped[int] = mapped_column(ForeignKey("areas_id"), nullable = False)
+    area_id: Mapped[int] = mapped_column(ForeignKey("areas.id"), nullable = False)
     created_by: Mapped[int] = mapped_column(ForeignKey("users.id"),nullable=False)
     status : Mapped[StoreStatus] = mapped_column(SQLEnum(StoreStatus, name="store_status"),
                                                     default=StoreStatus.PENDING, nullable = False)
 
-    reviewed_by : Mapped[int | None] = mapped_column(ForeignKey("user.id"), nullable = True)
+    reviewed_by : Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable = True)
 
     review_note : Mapped[str | None] = mapped_column(Text, nullable = True)
     reviewed_at : Mapped[datetime | None] = mapped_column(DateTime(timezone = True), nullable = True)
@@ -42,6 +42,6 @@ class Store(Base):
                                                 onupdate=lambda: datetime.now(timezone.utc),
                                                 nullable=False)
 
-    area = relationship("Area")
+    area = relationship("Area", back_populates="stores")
     creator = relationship("User", foreign_keys= created_by)
     reviewer = relationship("User", foreign_keys=reviewed_by)

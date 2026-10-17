@@ -35,3 +35,4 @@ class Area(Base):
     )
 
     users = relationship("User", back_populates="area")
+    stores = relationship("Store", back_populates="area")
